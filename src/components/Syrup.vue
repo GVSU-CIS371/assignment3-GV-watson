@@ -1,8 +1,16 @@
 <template>
-  <div class="syrup"></div>
+    <div class="syrup" :style="{ backgroundColor: props.isSyruped.color }"></div>
+
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+import { useBeverageStore } from "../stores/beverageStore";
+const beverageStore = useBeverageStore();
+
+const props = defineProps<{ isSyruped: typeof beverageStore.currentSyrup; }>();
+
+</script>
 <style lang="scss" scoped>
 .syrup {
   transform: translateY(400%);
