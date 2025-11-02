@@ -1,6 +1,10 @@
 <template>
   <div>
-    <Beverage :isIced="beverageStore.currentTemp === 'Cold'" />
+    <Beverage :isIced="beverageStore.currentTemp === 'Cold'" 
+    :isDrink="beverageStore.currentBase" 
+    :isCreamed="beverageStore.currentCreamer" 
+    :isSyruped="beverageStore.currentSyrup" />
+
     <ul>
       <li>
         <template v-for="temp in beverageStore.temps" :key="temp">
@@ -15,6 +19,47 @@
             {{ temp }}
           </label>
         </template>
+
+        <div>
+          <template v-for="base in beverageStore.base" :key="base.id">
+            <input
+              type="radio"
+              name="base"
+              :id="base.id"
+              :value="base"
+              v-model="beverageStore.currentBase"
+            />
+            <label :for="base.id">{{ base.name }}</label>
+          </template>
+        </div>
+
+        <div>
+          <template v-for="creamer in beverageStore.creamer" :key="creamer.id">
+            <input
+              type="radio"
+              name="creamer"
+              :id="creamer.id"
+              :value="creamer"
+              v-model="beverageStore.currentCreamer"
+            />
+            <label :for="creamer.id">{{ creamer.name }}</label>
+          </template>
+        </div>
+
+        <div>
+          <template v-for="syrup in beverageStore.syrup" :key="syrup.id">
+            <input
+              type="radio"
+              name="syrup"
+              :id="syrup.id"
+              :value="syrup"
+              v-model="beverageStore.currentSyrup"
+            />
+            <label :for="syrup.id">{{ syrup.name }}</label>
+          </template>
+        </div>
+
+  
       </li>
     </ul>
     <input type="text" placeholder="Beverage Name" />
@@ -27,6 +72,11 @@
 import Beverage from "./components/Beverage.vue";
 import { useBeverageStore } from "./stores/beverageStore";
 const beverageStore = useBeverageStore();
+
+
+
+
+
 </script>
 
 <style lang="scss">
